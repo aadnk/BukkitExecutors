@@ -1,0 +1,8 @@
+name: BukkitExecutors
+version: 1.0.0
+description: Turn BukkitScheduler into a ScheduledExecutorService.
+author: Comphenix
+website: http://www.comphenix.net/BukkitExecutors
+
+main: com.comphenix.executors.internal.DummyPlugin
+database: false
