@@ -1,7 +1,5 @@
 package com.comphenix.executors;
 
-
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
@@ -20,7 +18,7 @@ public class BukkitExecutors {
 	 */
 	public static BukkitScheduledExecutorService newSynchronous(final Plugin plugin) {
 		// Bridge destination
-		final BukkitScheduler scheduler = getScheduler();
+		final BukkitScheduler scheduler = getScheduler(plugin);
 		Preconditions.checkNotNull(plugin, "plugin cannot be NULL");
 		
 		BukkitScheduledExecutorService service = new AbstractBukkitService(new PendingTasks(plugin, scheduler)) {
@@ -51,7 +49,7 @@ public class BukkitExecutors {
 	 */
 	public static BukkitScheduledExecutorService newAsynchronous(final Plugin plugin) {
 		// Bridge destination
-		final BukkitScheduler scheduler = getScheduler();
+		final BukkitScheduler scheduler = getScheduler(plugin);
 		Preconditions.checkNotNull(plugin, "plugin cannot be NULL");
 		
 		BukkitScheduledExecutorService service = new AbstractBukkitService(new PendingTasks(plugin, scheduler)) {
@@ -79,8 +77,8 @@ public class BukkitExecutors {
 	 * Retrieve the current Bukkit scheduler.
 	 * @return Current scheduler.
 	 */
-	private static BukkitScheduler getScheduler() {
-		BukkitScheduler scheduler = Bukkit.getScheduler();
+	private static BukkitScheduler getScheduler(Plugin plugin) {
+		BukkitScheduler scheduler = plugin.getServer().getScheduler();
 		
 		if (scheduler != null) {
 			return scheduler;
